@@ -1,0 +1,81 @@
+<head>
+    <title>Easter Egg!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        background-image: url('images/bg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        height: 120vh;
+        width: 100vw;
+        margin: 0rem;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-size: 70px;
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    #image-track {
+        display: flex;
+        gap: 5vmin;
+        position: absolute;
+        left: 50%;
+        top: 55%;
+        transform: translate(-50%, -50%);
+        user-select: none;
+    }
+
+    #image-track img {
+        width: 200%;
+        height: auto;
+        object-fit: cover;
+        object-position: 100% center;
+        transition: transform 0.5s ease;
+    }
+</style>
+<body>
+    <h1>Congratulations! You found the Easter Egg!</h1>
+    <div id="image-track">
+        <div class="image-container"><img src="images/1.png" draggable="false" width="400px" height="auto"/></div>
+        <div class="image-container"><img src="images/2.png" draggable="false" width="400px" height="auto"/></div>
+        <div class="image-container"><img src="images/3.png" draggable="false" width="400px" height="auto"/></div>
+        <div class="image-container"><img src="images/4.png" draggable="false" width="400px" height="auto"/></div>
+        <div class="image-container"><img src="images/5.png" draggable="false" width="400px" height="auto"/></div>
+        <div class="image-container"><img src="images/6.png" draggable="false" width="400px" height="auto"/></div>
+    </div>
+
+    <script>
+        const track = document.getElementById("image-track");
+        const images = track.getElementsByTagName("img");
+        const trackWidth = track.offsetWidth;
+        const trackHeight = track.offsetHeight;
+    
+        setInterval(() => {
+            for (const image of images) {
+                const maxX = trackWidth - image.offsetWidth;
+                const maxY = trackHeight - image.offsetHeight;
+    
+                const randomX = Math.floor(Math.random() * (maxX > 0 ? maxX : 0));
+                const randomY = Math.floor(Math.random() * (maxY > 0 ? maxY : 0));
+    
+                const directionX = Math.random() < 0.5 ? -1 : 1;
+                const directionY = Math.random() < 0.5 ? -1 : 1;
+    
+                const translateX = randomX * directionX;
+                const translateY = randomY * directionY;
+    
+                image.style.transform = `translate(${translateX}px, ${translateY}px)`;
+            }
+        }, 2000);
+    </script>
+    
+</body>

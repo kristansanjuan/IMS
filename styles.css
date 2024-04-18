@@ -1,0 +1,369 @@
+.expiration-window {
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    background-color: rgba(248, 175, 212, 0.918);
+    border: 2px dashed #8c8c8c;
+    padding: 20px;
+    width: 400px;
+    border-radius: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 9998;
+    margin-top: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.expiration-window.show {
+    display: block;
+    padding-top: 0;
+    opacity: 1;
+}
+
+body{
+    background-color: rgb(255, 155, 205);
+}
+
+.archived-products {
+    display: block; /* Ensure the container is visible */
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.fadeIn {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.upper-bar {
+    font-family: Georgia;
+    background-color: rgb(255, 155, 205);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.upper-bar:hover {
+    cursor: pointer;
+}
+
+.upper-bar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.upper-bar a:hover {
+    background-color: rgb(255, 80, 167);
+}
+
+.logo {
+    margin-bottom: 10px;
+}
+
+.logo img {
+    margin-top: -30px;
+    width: 220px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.navigation {
+    margin-top: -145px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: 50px;
+}
+
+.navigation a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.navigation div {
+    flex: 1;
+}
+
+.navigation div:nth-child(2) {
+    margin-right: 170px;
+}
+
+.navigation div:nth-child(3) {
+    margin-left: 150px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    z-index: 2;
+}
+
+th, td {
+    border: 1px solid #000000;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: rgb(255, 155, 205);
+    color: rgb(0, 0, 0);
+}
+
+.title {
+    text-align: center;
+}
+
+.add-btn {
+    background-color: rgb(1, 116, 68);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.add-btn:hover {
+    background-color: green;
+}
+
+.restore-Btn {
+        background-color: rgb(1, 116, 68);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 30px;
+        margin-left: 1620px;
+}
+
+.restore-Btn:hover {
+    background-color: green;
+}
+
+.delete-btn {
+    background-color: rgb(223, 22, 22);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    position: absolute;
+    right: 1%;
+}
+
+.chckall-Btn {
+    background-color: rgb(223, 22, 22);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    position: absolute;
+    right: 12%;
+}
+
+.unchckall-Btn {
+    background-color: rgb(223, 22, 22);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    position: absolute;
+    right: 12%;
+}
+
+.chckall-Btn:hover {
+    background-color: red;
+}
+
+.unchckall-Btn:hover {
+    background-color: red;
+}
+
+.delete-btn:hover {
+    background-color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+.background {
+    position: relative;
+    top: 180px;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    z-index: -1;
+    background-color: rgb(255, 155, 205);
+}
+
+.background p {
+    font-family: Georgia;
+    font-size: 44px;
+    line-height: 0.2;
+    margin-left: 6.5%;
+    display: inline-block;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.design {
+    position: fixed;
+    top: 50%;
+    right: 50px;
+    transform: translateY(-50%);
+    opacity: 0;
+    animation: fadeInDesign 1s ease-in-out forwards;
+}
+
+@keyframes fadeInDesign {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.design img {
+    margin-bottom: 10px;
+}
+
+.pin-container {
+    position: fixed;
+    top: -250px;
+    right: 290px;
+}
+
+.pin-container img {
+    width: 300px;
+    transform: scaleY(-1);
+}
+
+.sugar-container {
+    position: fixed;
+    top: 150px;
+    right: 540px;
+}
+
+.sugar-container img {
+    width: 200px;
+}
+
+.spoon-container {
+    position: fixed;
+    top: 20px;
+    right: -50px;
+}
+
+.spoon-container img {
+    width: 350px;
+}
+
+.egg-container {
+    position: fixed;
+    top: 200px;
+    right: 300px;
+}
+
+.egg-container img {
+    width: 200px;
+}
+
+.spatula-container {
+    position: fixed;
+    top: -410px;
+    right: -350px;
+}
+
+.spatula-container img {
+    width: 750px;
+    transform: scaleY(-1);
+}
+
+.whisk-container {
+    position: fixed;
+    top: -190px;
+    right: 555px;
+}
+
+.whisk-container img {
+    width: 350px;
+    transform: scaleY(-1);
+}
+
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.product-management {
+    margin-top: 60px;
+    align-items: left;
+}
+
+h3 {
+    font-size: 30px;
+    margin-top: 70px;
+}
+
+.save-btn {
+    background-color: rgb(1, 116, 68);
+    margin-top: 30px;
+    margin-left: 1750px;
+}
+
+.save-btn:hover {
+    background-color: green;
+}
+
+#clock {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 18px;
+    color: #000000;
+    z-index: 9999;
+}
+
+#image-track {
+    display: flex;
+    gap: 5vmin;
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(0%, -50%);
+    user-select: none;
+}
+
+#image-track img {
+    width: 35%;
+    height: auto;
+    object-fit: cover;
+    object-position: 100% center;
+}
