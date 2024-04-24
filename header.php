@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <div class="upper-bar">
     <div class="logo">

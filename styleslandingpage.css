@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    overflow: hidden;
+}
+
+.main-header {
+    height: 20px;
+    background-color: rgba(248, 175, 212, 0.918);
+}
+
+div.banner{
+    background: url('images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+div.LPContainer{
+    width: 100%;
+    max-width: 900px;
+    height: 80Vh;
+    margin: 0 auto;
+}

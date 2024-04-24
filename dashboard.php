@@ -57,7 +57,7 @@
 
                 localStorage.setItem('reloadCount', reloadCount);
 
-                if (reloadCount >= 20) {
+                if (reloadCount >= 100) {
                     localStorage.removeItem('reloadCount');
 
                     window.location.href = 'Egg.html';

@@ -15,11 +15,22 @@
     transition: opacity 1s ease-in-out;
 }
 
+@media (max-width: 500px){
+    .navigation{
+        flex-direction: row;
+        font-size: 8px!important;
+    }
+    .logo img {
+        width: 100px;
+    }
+}
+
 .expiration-window.show {
     display: block;
     padding-top: 0;
     opacity: 1;
 }
+
 
 body{
     background-color: rgb(255, 155, 205);

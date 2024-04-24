@@ -14,7 +14,7 @@
             <button id="uncheckAllBtn" class="unchckall-Btn hidden">Uncheck All</button>
             <button id="addProductBtn" class="add-btn">Add Product</button>
             <button id="deleteSelectedBtn" class="delete-btn hidden">Delete Selected Products</button>
-            <button id="importExcelBtn" class="import-btn">Import from Excel</button>
+            <button id="importExcelBtn" class="add-btn">Import from Excel</button>
             <input type="file" id="importExcelInput" accept=".xls,.xlsx" style="display: none;" />
 
             <table id="productTable">
@@ -30,7 +30,7 @@
 
         <div class="supply-management">
             <h1>Supply Management</h1>
-            <button id="exportSupplyExcelBtn" class="export-btn">Export to Excel</button>
+            <button id="exportSupplyExcelBtn" class="add-btn">Export to Excel</button>
             <table id="supplyTable">
                 <thead>
                     <tr>
@@ -230,11 +230,17 @@
         
         //this is the process on how the user add product
         document.getElementById("addProductBtn").addEventListener("click", function() {
-            var productName = prompt("Enter product name:");
-            if (productName === null || productName.trim() === "") {
-                alert("Product Name cannot be empty.");
-                return;
-            }
+            var productName;
+            do {
+                productName = prompt("Enter product name:");
+                if (productName === null) {
+                    // User clicked cancel, exit the function
+                    return;
+                }
+                if (productName.trim() === "") {
+                    alert("Product Name cannot be empty.");
+                }
+            } while (productName.trim() === "");
 
             var storedProducts = JSON.parse(localStorage.getItem("products")) || [];
             var productExists = storedProducts.some(product => product.name === productName);
@@ -243,32 +249,49 @@
                 return;
             }
     
-            var quantity = prompt("Enter quantity:");
-            if (quantity === null) {
-                alert("Quantity cannot be empty.");
-                return;
-            }
-            if (quantity.trim() === "" || isNaN(quantity) || parseInt(quantity) <= 0) {
-                alert("Please enter a valid quantity.");
-                return;
-            }
+            var quantity;
+            do {
+                quantity = prompt("Enter quantity:");
+                if (quantity === null) {
+                    return;
+                }
+                if (quantity.trim() === "") {
+                    alert("Quantity cannot be empty.");
+                } else if (isNaN(quantity) || parseInt(quantity) <= 0) {
+                    alert("Please enter a valid quantity.");
+                }
+            } while (quantity === null || quantity.trim() === "" || isNaN(quantity) || parseInt(quantity) <= 0);
+
     
-            var price = prompt("Enter price:");
-            if (price === null) {
-                alert("Price cannot be empty");
-            }
-            if (price.trim() === "" || isNaN(price) || parseInt(price) <= 0) {
-                alert("Please enter a valid Price.");
-            }
+            var price;
+            do {
+                price = prompt("Enter price:");
+                if (price === null) {
+                    return;
+                }
+                if (price.trim() === "") {
+                    alert("Price cannot be empty.");
+                } else if (isNaN(price) || parseFloat(price) <= 0) {
+                    alert("Please enter a valid price.");
+                }
+            } while (price === null || price.trim() === "" || isNaN(price) || parseFloat(price) <= 0);
+
 
             var dateAdded = new Date().toLocaleString();
     
             var supplier = prompt("Enter supplier:");
     
-            var expirationDays = prompt("Enter days before expiration:");
-            if (expirationDays === null || expirationDays.trim() === "" || isNaN(expirationDays) || parseInt(expirationDays) <= 0) {
-                alert("Please enter a valid number of days.");      
-            }
+            var expirationDays;
+            do {
+                expirationDays = prompt("Enter days before expiration: (negative values = expired)");
+                if (expirationDays === null) {
+                    return;
+                }
+                if (expirationDays.trim() === "" || isNaN(expirationDays) || parseInt(expirationDays) === 0) {
+                    alert("Please enter a valid number of days.");
+                }
+            } while (expirationDays === null || expirationDays.trim() === "" || isNaN(expirationDays) || parseInt(expirationDays) === 0);
+
             var expirationDate = calculateExpirationDate(expirationDays);
             addProductToTable(productName, quantity, price, supplier, dateAdded, expirationDate);
             saveProductToStorage(productName, quantity, price, supplier, dateAdded, expirationDate);
@@ -540,9 +563,12 @@
                 }
             });
 
-            document.getElementById("restoreSelectedBtn").classList.remove("hidden");
+            var restoreButton = document.getElementById("restoreSelectedBtn");
+            restoreButton.classList.remove("hidden");
+            restoreButton.addEventListener("click", restoreSelectedProducts);
         }
 
+        //Product Info
         function getProductInfoByIndex(product, index) {
             switch (index) {
                 case 1:
@@ -560,38 +586,48 @@
             }
         }
 
-        document.getElementById("restoreSelectedBtn").addEventListener("click", function() {
-            restoreSelectedProducts();
-        });
-
         function restoreSelectedProducts() {
-            var checkedProducts = document.querySelectorAll("#archivedProductList input[type='checkbox']:checked");
-            if (checkedProducts.length >= 1) {
-                if (confirm("Are you sure you want to restore the selected product(s)?")) {
-                    checkedProducts.forEach(function(checkbox) {
-                        var productName = checkbox.parentNode.nextElementSibling.textContent;
-                        restoreProduct(productName);
-                    });
-                    location.reload();
-                }
+            var confirmed = confirm("Are you sure you want to restore the selected products?");
+    
+            if (!confirmed) {
+                return;
             }
+
+            var restoredProducts = [];
+
+            var checkboxes = document.querySelectorAll("#archivedProductList input[type='checkbox']:checked");
+
+            checkboxes.forEach(function(checkbox) {
+                var productName = checkbox.value;
+                var restoredProduct = findProductByName(productName);
+                if (restoredProduct) {
+                    restoredProducts.push(restoredProduct);
+                }
+            });
+
+            var productList = JSON.parse(localStorage.getItem("products")) || [];
+            productList.push(...restoredProducts);
+            localStorage.setItem("products", JSON.stringify(productList));
+
+            var archivedProducts = JSON.parse(localStorage.getItem("deletedProducts")) || [];
+            var updatedArchivedProducts = archivedProducts.filter(function(product) {
+                return !restoredProducts.some(function(restoredProduct) {
+                    return restoredProduct.name === product.name;
+                });
+            });
+            localStorage.setItem("deletedProducts", JSON.stringify(updatedArchivedProducts));
+
+            console.log("Restoration successful!");
+            displayArchivedProducts();
+            displayProducts();;
+            location.reload();
         }
 
-        //restore products
-        function restoreProduct(productName) {
-            var archivedProducts = JSON.parse(localStorage.getItem("deletedProducts")) || [];
-            var index = archivedProducts.findIndex(function(product) {
+        function findProductByName(productName) {
+            var productList = JSON.parse(localStorage.getItem("deletedProducts")) || [];
+            return productList.find(function(product) {
                 return product.name === productName;
             });
-            if (index !== -1) {
-                var restoredProduct = archivedProducts.splice(index, 1)[0];
-                var existingProducts = JSON.parse(localStorage.getItem("products")) || [];
-                existingProducts.push(restoredProduct);
-                localStorage.setItem("products", JSON.stringify(existingProducts));
-                localStorage.setItem("deletedProducts", JSON.stringify(archivedProducts));
-                displayProducts();
-                displayArchivedProducts();
-            }
         }
 
         function getProductSupplier(productName) {
