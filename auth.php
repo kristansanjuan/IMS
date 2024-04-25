@@ -5,7 +5,7 @@ session_start();
 if (!defined('AUTH_INCLUDED')) {
     define('AUTH_INCLUDED', true);
     if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
-        header("Location: admin.php");
+        header("Location: index.php");
         exit();
     }
 }

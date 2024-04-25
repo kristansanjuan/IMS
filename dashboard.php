@@ -117,7 +117,7 @@
 
                 setTimeout(function() {
                     document.getElementById("expirationWindow").classList.remove("show");
-                }, 6500);
+                }, 10000);
             }
         }
 
