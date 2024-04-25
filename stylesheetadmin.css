@@ -12,9 +12,9 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: cover;
     background: center;
-    background-image: url('images/background.jpg');
+	color:rgb(255, 80, 167);
+    background-image: url('images/trytry.png');
 }
 
 .admin-login {
