@@ -13,8 +13,12 @@ body {
     align-items: center;
     min-height: 100vh;
     background: center;
-	color:rgb(255, 80, 167);
+	background-repeat: no-repeat;
     background-image: url('images/trytry.png');
+	background-size: contain;
+    background-position: center center;
+    position:relative;
+	background-color: rgb(200, 137, 182);
 }
 
 .admin-login {
