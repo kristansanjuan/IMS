@@ -12,11 +12,13 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: cover;
     background: center;
-    background-image: url('images/background.jpg'); 
-    background-repeat: no-repeat;
-    background-color: rgb(249, 175, 212);
+	background-repeat: no-repeat;
+    background-image: url('images/trytry.png');
+	background-size: contain;
+    background-position: center center;
+    position:relative;
+	background-color: rgb(200, 137, 182);
 }
 
 .admin-login {
