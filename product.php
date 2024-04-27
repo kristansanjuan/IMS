@@ -48,22 +48,25 @@
             <button id="saveButton" class="add-btn save-btn">Save</button>
         </div>
 
-        <div class="archived-products">
-            <h1>Archived Products</h1>
-            <table id="archivedProductTable">
-                <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Supplier</th>
-                        <th>Date Added</th>
-                    </tr>
-                </thead>
-                <tbody id="archivedProductList">
-                </tbody>
-            </table>
-            <button id="restoreSelectedBtn" class="restore-Btn">Restore Selected Products</button>
+        <button id="toggleArchivedBtn" class="archieved-btn" >Show Archived Products</button>
+        <div class="archived-products" id="archivedProductsTableWrapper" style="display: none;">
+            <div class="archived-products">
+                <h1>Archived Products</h1>
+                <table id="archivedProductTable">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Supplier</th>
+                            <th>Date Added</th>
+                        </tr>
+                    </thead>
+                    <tbody id="archivedProductList">
+                    </tbody>
+                </table>
+                <button id="restoreSelectedBtn" class="restore-Btn">Restore Selected Products</button>
+            </div>
         </div>
     </div>
 
@@ -87,6 +90,15 @@
                 input.setAttribute("data-original-value", input.textContent.trim());
             });
             
+            document.getElementById("toggleArchivedBtn").addEventListener("click", function() {
+            var archivedProductsTableWrapper = document.getElementById("archivedProductsTableWrapper");
+                if (archivedProductsTableWrapper.style.display === "none") {
+                    archivedProductsTableWrapper.style.display = "block";
+                    displayArchivedProducts();
+                } else {
+                    archivedProductsTableWrapper.style.display = "none";
+                }
+            });
 
             //this is for user click on header to arrange it
             document.getElementById("productNameHeader").addEventListener("click", function() {

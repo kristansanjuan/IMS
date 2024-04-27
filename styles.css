@@ -149,6 +149,36 @@ th {
     background-color: green;
 }
 
+.archieved-btn {
+    background-color: rgb(1, 116, 68);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    z-index: 9998;
+}
+
+.archieved-btn:hover {
+    background-color: green;
+}
+
+.harchieved-btn {
+    background-color: rgb(223, 22, 22);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    z-index: 9999;
+}
+
+.harchieved-btn:hover {
+    background-color: red;
+}
+
 .restore-Btn {
         background-color: rgb(1, 116, 68);
         padding: 10px 20px;
