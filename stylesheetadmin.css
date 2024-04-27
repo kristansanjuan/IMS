@@ -14,7 +14,9 @@ body {
     min-height: 100vh;
     background: cover;
     background: center;
-    background-image: url('images/background.jpg');
+    background-image: url('images/background.jpg'); 
+    background-repeat: no-repeat;
+    background-color: rgb(249, 175, 212);
 }
 
 .admin-login {
@@ -50,7 +52,7 @@ h2 {
     background: #fff; 
     transition: .5s ease;
     background:  rgb(255, 80, 167);
-    box-shadow: 0 0 10px  rgb(255, 80, 167);
+    box-shadow: 0 0 10px  rgb(255, 155, 205);
 }
 
 .input-box label {
@@ -88,7 +90,7 @@ h2 {
     font-size: 1.2em;
     line-height: 57px;
     transition: .5s ease;
-    color: #00f7ff;
+    color: rgb(255, 80, 167);
     filter: drop-shadow(0 0 5px #00f7ff);
 }
 

@@ -34,6 +34,7 @@
 
 body{
     background-color: rgb(255, 155, 205);
+    height: 90vh;
 }
 
 .archived-products {
