@@ -398,7 +398,7 @@ h3 {
     gap: 5vmin;
     position: absolute;
     left: 50%;
-    top: 55%;
+    top: 65%;
     transform: translate(0%, -50%);
     user-select: none;
 }

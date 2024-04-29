@@ -10,10 +10,19 @@
             margin: 0rem;
             overflow: hidden;
         }
+
+        p {
+            margin-top: 10vh; /* Add some margin around the paragraph */
+            padding: 10px; /* Add padding inside the paragraph */
+            border-radius: 5px; /* Add rounded corners to the paragraph */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+            font-size: 40px; /* Adjust the font size */
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-
+    <p>Our inventory system functions like a typical inventory system except for alerting users in a timely manner when products are set to expire within a 30-day window, guaranteeing proactive management. Additionally, it helps users keep track of their inventories and supplies efficiently.</p>
     <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
         <img src="images/dev1.png" draggable="false" width="400px" height="auto"/>
         <img src="images/dev2.png" draggable="false" width="400px" height="auto"/>
