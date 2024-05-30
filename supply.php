@@ -4,9 +4,7 @@
     <?php include('header.php')?>
     <?php include('auth.php'); ?>
     <style>
-        .supply-management,
-        .archived-products,
-        #toggleArchivedBtn {
+        .product-management{
             display: none;
         }
     </style>
@@ -17,7 +15,6 @@
     <div class="content">
         <div class="product-management">
             <h1>Product Management</h1>
-            <input type="text" id="searchInput" placeholder="Search by product name">
             <button id="checkAllBtn" class="chckall-Btn">Check All</button>
             <button id="uncheckAllBtn" class="unchckall-Btn hidden">Uncheck All</button>
             <button id="addProductBtn" class="add-btn">Add Product</button>
@@ -37,7 +34,9 @@
         </div>
 
         <div class="supply-management">
+        <h1></h1>
             <h1>Supply Management</h1>
+            <input type="text" id="searchInput1" placeholder="Search by any field">
             <button id="exportSupplyExcelBtn" class="add-btn">Export to Excel</button>
             <table id="supplyTable">
                 <thead>
@@ -60,6 +59,10 @@
         <div class="archived-products" id="archivedProductsTableWrapper" style="display: none;">
             <div class="archived-products">
                 <h1>Archived Products</h1>
+                <input type="text" id="searchInput2" placeholder="Search by any field">
+                <button id="restoreSelectedBtn" class="restore-Btn hidden">Restore Selected Products</button>
+                <button id="checkAllBtn1" class="chckall-Btn1">Check All</button>
+                <button id="uncheckAllBtn1" class="unchckall-Btn1 hidden">Uncheck All</button>
                 <table id="archivedProductTable">
                     <thead>
                         <tr>
@@ -73,7 +76,6 @@
                     <tbody id="archivedProductList">
                     </tbody>
                 </table>
-                <button id="restoreSelectedBtn" class="restore-Btn">Restore Selected Products</button>
             </div>
         </div>
     </div>
@@ -88,6 +90,10 @@
                 checkbox.addEventListener("change", toggleButtonsVisibility);
             });
 
+            document.querySelectorAll("#supplyList input[type='checkbox']").forEach(function(checkbox) {
+                checkbox.addEventListener("change", toggleButtonsVisibility);
+            });
+
             document.getElementById("saveButton").addEventListener("click", function() {
                 changesSaved = true;
             });
@@ -98,6 +104,48 @@
                 input.setAttribute("data-original-value", input.textContent.trim());
             });
             
+            document.getElementById("searchInput1").addEventListener("input", function() {
+                var searchText = this.value.toLowerCase();
+                var rows = document.getElementById("supplyList").querySelectorAll("tr");
+
+                rows.forEach(function(row) {
+                    var cells = row.querySelectorAll("td");
+                    var found = false;
+                    cells.forEach(function(cell) {
+                        var cellText = cell.textContent.toLowerCase();
+                        if (cellText.includes(searchText)) {
+                            found = true;
+                        }
+                    });
+                    if (found) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            });
+
+            document.getElementById("searchInput2").addEventListener("input", function() {
+                var searchText = this.value.toLowerCase();
+                var rows = document.getElementById("archivedProductList").querySelectorAll("tr");
+
+                rows.forEach(function(row) {
+                    var cells = row.querySelectorAll("td");
+                    var found = false;
+                    cells.forEach(function(cell) {
+                        var cellText = cell.textContent.toLowerCase();
+                        if (cellText.includes(searchText)) {
+                            found = true;
+                        }
+                    });
+                    if (found) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            });
+  
             document.getElementById("toggleArchivedBtn").addEventListener("click", function() {
             var archivedProductsTableWrapper = document.getElementById("archivedProductsTableWrapper");
                 if (archivedProductsTableWrapper.style.display === "none") {
@@ -107,51 +155,6 @@
                     archivedProductsTableWrapper.style.display = "none";
                 }
             });
-
-            document.getElementById("searchInput").addEventListener("input", function() {
-                var searchTerm = this.value.trim().toLowerCase();
-                var rows = document.querySelectorAll("#productList tr");
-                rows.forEach(function(row) {
-                    var productName = row.querySelector("td:first-child").textContent.trim().toLowerCase();
-                    if (productName.includes(searchTerm)) {
-                        row.style.display = "";
-                    } else {
-                        row.style.display = "none";
-                    }
-                });
-            });
-
-            var productNameSortOrder = 1;
-
-            document.getElementById("productTable").addEventListener("click", function(e) {
-                if (e.target.tagName === "TH") {
-                    var columnIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
-                    if (columnIndex === 0) {
-                        sortTableByProductName(columnIndex);
-                    }
-                }
-            });
-
-            //this is for user click on header in product management table
-            function sortTableByProductName(columnIndex) {
-                var table = document.getElementById("productTable");
-                var rows = Array.from(table.querySelectorAll("tbody tr"));
-                rows.sort(function(rowA, rowB) {
-                    var productNameA = rowA.cells[columnIndex].textContent.trim().toLowerCase();
-                    var productNameB = rowB.cells[columnIndex].textContent.trim().toLowerCase();
-                    return productNameSortOrder * productNameA.localeCompare(productNameB);
-                });
-
-                var tbody = table.querySelector("tbody");
-                tbody.innerHTML = "";
-
-                rows.forEach(function(row) {
-                    tbody.appendChild(row);
-                });
-
-                productNameSortOrder *= -1;
-            }
-
 
             //this is for user click on header to arrange it
             document.getElementById("productNameHeader").addEventListener("click", function() {
@@ -189,6 +192,24 @@
                 });
                 toggleButtonsVisibility();
                 toggleDeleteButton();
+            });
+
+            document.getElementById("checkAllBtn1").addEventListener("click", function() {
+                var checkboxes = document.querySelectorAll("#archivedProductTable input[type='checkbox']");
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.checked = true;
+                });
+                toggleButtonsVisibility1();
+                toggleRestoreButton();
+            });
+
+            document.getElementById("uncheckAllBtn1").addEventListener("click", function() {
+                var checkboxes = document.querySelectorAll("#archivedProductTable input[type='checkbox']");
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.checked = false;
+                });
+                toggleButtonsVisibility1();
+                toggleRestoreButton();
             });
         });
     
@@ -290,6 +311,32 @@
                 deleteSelectedBtn.classList.remove("hidden");
             } else {
                 deleteSelectedBtn.classList.add("hidden");
+            }
+        }
+
+        function toggleRestoreButton() {
+            var checkboxes = document.querySelectorAll("#archivedProductList input[type='checkbox']");
+            var restoreSelectedBtn = document.getElementById("restoreSelectedBtn");
+            var checkedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+            if (checkedCount >= 1) {
+                restoreSelectedBtn.classList.remove("hidden");
+            } else {
+                restoreSelectedBtn.classList.add("hidden");
+            }
+        }
+
+        function toggleButtonsVisibility1() {
+            var checkboxes = document.querySelectorAll("#archivedProductTable input[type='checkbox']");
+            var checkAllBtn = document.getElementById("checkAllBtn1");
+            var uncheckAllBtn = document.getElementById("uncheckAllBtn1");
+            var allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+
+            if (allChecked) {
+                checkAllBtn1.classList.add("hidden");
+                uncheckAllBtn1.classList.remove("hidden");
+            } else {
+                checkAllBtn1.classList.remove("hidden");
+                uncheckAllBtn1.classList.add("hidden");
             }
         }
         
@@ -652,6 +699,13 @@
         }
 
         function restoreSelectedProducts() {
+            var checkboxes = document.querySelectorAll("#archivedProductList input[type='checkbox']:checked");
+
+            // Check if any checkboxes are checked
+            if (checkboxes.length === 0) {
+                alert("No products selected for restoration!");
+                return;
+            }
             var confirmed = confirm("Are you sure you want to restore the selected products?");
     
             if (!confirmed) {

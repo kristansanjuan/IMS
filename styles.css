@@ -59,6 +59,87 @@ body{
     z-index: 1;
 }
 
+#searchInput {
+    background-color: rgb(245, 245, 245);
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    position: absolute;
+    right: 18%;
+}
+
+#searchInput1 {
+    background-color: rgb(245, 245, 245);
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    position: absolute;
+    right: 5%;
+}
+
+#searchInput2 {
+    background-color: rgb(245, 245, 245);
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: -50px;
+    position: absolute;
+    right: 22%;
+}
+
+.chckall-Btn1 {
+    background-color: rgb(223, 22, 22);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: -50px;
+    position: absolute;
+    right: 15%;
+}
+
+.unchckall-Btn1 {
+    background-color: rgb(223, 22, 22);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: -50px;
+    position: absolute;
+    right: 15%;
+}
+
+.chckall-Btn1:hover {
+    background-color: red;
+}
+
+.unchckall-Btn1:hover {
+    background-color: red;
+}
+
+.restore-Btn {
+    background-color: rgb(1, 116, 68);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: -50px;
+    margin-left: 1640px;
+}
+
+.restore-Btn:hover {
+background-color: green;
+}
+
 .upper-bar:hover {
     cursor: pointer;
 }
@@ -177,19 +258,6 @@ th {
 
 .harchieved-btn:hover {
     background-color: red;
-}
-
-.restore-Btn {
-        background-color: rgb(1, 116, 68);
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        margin-top: 30px;
-        margin-left: 1620px;
-}
-
-.restore-Btn:hover {
-    background-color: green;
 }
 
 .delete-btn {

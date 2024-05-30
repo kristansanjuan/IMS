@@ -3,13 +3,6 @@
     <link rel="stylesheet" href="/styles.css">
     <?php include('header.php')?>
     <?php include('auth.php'); ?>
-    <style>
-        .supply-management,
-        .archived-products,
-        #toggleArchivedBtn {
-            display: none;
-        }
-    </style>
 </head>
 
 <body>
@@ -17,7 +10,6 @@
     <div class="content">
         <div class="product-management">
             <h1>Product Management</h1>
-            <input type="text" id="searchInput" placeholder="Search by product name">
             <button id="checkAllBtn" class="chckall-Btn">Check All</button>
             <button id="uncheckAllBtn" class="unchckall-Btn hidden">Uncheck All</button>
             <button id="addProductBtn" class="add-btn">Add Product</button>
@@ -107,51 +99,6 @@
                     archivedProductsTableWrapper.style.display = "none";
                 }
             });
-
-            document.getElementById("searchInput").addEventListener("input", function() {
-                var searchTerm = this.value.trim().toLowerCase();
-                var rows = document.querySelectorAll("#productList tr");
-                rows.forEach(function(row) {
-                    var productName = row.querySelector("td:first-child").textContent.trim().toLowerCase();
-                    if (productName.includes(searchTerm)) {
-                        row.style.display = "";
-                    } else {
-                        row.style.display = "none";
-                    }
-                });
-            });
-
-            var productNameSortOrder = 1;
-
-            document.getElementById("productTable").addEventListener("click", function(e) {
-                if (e.target.tagName === "TH") {
-                    var columnIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
-                    if (columnIndex === 0) {
-                        sortTableByProductName(columnIndex);
-                    }
-                }
-            });
-
-            //this is for user click on header in product management table
-            function sortTableByProductName(columnIndex) {
-                var table = document.getElementById("productTable");
-                var rows = Array.from(table.querySelectorAll("tbody tr"));
-                rows.sort(function(rowA, rowB) {
-                    var productNameA = rowA.cells[columnIndex].textContent.trim().toLowerCase();
-                    var productNameB = rowB.cells[columnIndex].textContent.trim().toLowerCase();
-                    return productNameSortOrder * productNameA.localeCompare(productNameB);
-                });
-
-                var tbody = table.querySelector("tbody");
-                tbody.innerHTML = "";
-
-                rows.forEach(function(row) {
-                    tbody.appendChild(row);
-                });
-
-                productNameSortOrder *= -1;
-            }
-
 
             //this is for user click on header to arrange it
             document.getElementById("productNameHeader").addEventListener("click", function() {
